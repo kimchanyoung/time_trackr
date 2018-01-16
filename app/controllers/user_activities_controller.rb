@@ -19,7 +19,7 @@ class UserActivitiesController < ApplicationController
   def generate_report
     collection = {}
     (0..7).each do |days_ago|
-      day = (7-days_ago).days.ago
+      day = (7-days_ago).days.ago.in_time_zone("Eastern Time (US & Canada)")
       puts "Checking day #{day}"
       collection[day.strftime("%m.%d.%Y")] = {}
       time_to_check = day.beginning_of_day
@@ -28,7 +28,7 @@ class UserActivitiesController < ApplicationController
         next_time = time_to_check + 15.minutes
         user_activity = current_user.user_activities
           .where('start_time >= ? AND start_time <= ?', time_to_check, next_time)
-          .max { |a, b| a.duration <=> b.duration }
+          .max { |a, b| a.duration <=> b.duration } || current_user.user_activities.where('start_time <= ?', time_to_check).order(start_time: :asc).last
         collection[day.strftime("%m.%d.%Y")][time_to_check.strftime("%H:%M")] = user_activity&.activity&.description 
         time_to_check = next_time
       end
