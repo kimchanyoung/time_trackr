@@ -1,0 +1,8 @@
+<h2><%= Date.current %></h2>
+<h2><%= current_user.active_activity&.activity&.description || "Taking a break" %></h2>
+<% Activity.all.each do |activity| %>
+  <%= button_to (activity.description || "Break"), start_activity_user_activities_path, params: { activity_id: activity.id } %>
+<% end %>
+
+<%= button_to "Generate Report", generate_report_user_activities_path, remote: true %>
+

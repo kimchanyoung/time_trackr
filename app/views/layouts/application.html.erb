@@ -12,5 +12,9 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
+    <% if current_user %>
+      <p>Logged in as <%= current_user&.email %></p>
+      <p><%= link_to "Log out", destroy_user_session_path, method: :delete %></p>
+    <% end %>
   </body>
 </html>

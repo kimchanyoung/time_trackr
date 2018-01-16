@@ -132,6 +132,9 @@ GEM
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
+    rubyXL (3.3.27)
+      nokogiri (>= 1.4.4)
+      rubyzip (>= 1.1.6)
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
     sass (3.5.5)
@@ -196,6 +199,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   puma (~> 3.7)
   rails (~> 5.1.4)
+  rubyXL (= 3.3.27)
   sass-rails (~> 5.0)
   selenium-webdriver
   spring
